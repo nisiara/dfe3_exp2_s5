@@ -19,11 +19,11 @@ import {
 export function TableTravels() {
 	return (
 		<Table>
-			<TableHeader>
+			<TableHeader className="bg-slate-100">
 				<TableRow>
-					<TableHead>Product</TableHead>
-					<TableHead>Price</TableHead>
-					<TableHead className="text-right">Actions</TableHead>
+					<TableHead className="font-semibold">Product</TableHead>
+					<TableHead className="font-semibold">Price</TableHead>
+					<TableHead className="text-right font-semibold">Actions</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>

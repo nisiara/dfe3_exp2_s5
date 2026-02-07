@@ -3,9 +3,8 @@ import { AppSidebar } from '@/components/app-siderbar'
 import { SectionCards } from '@/components/sections-cards'
 import { SiteHeader } from '@/components/site-header'
 import { TableTravels } from '@/components/table-travels'
+import { FormTravels } from '@/components/form-travels'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
-
-// import data from './data.json'
 
 export default function Page() {
 	return (
@@ -48,6 +47,7 @@ export default function Page() {
 									<ChartAreaInteractive />
 								</div> */}
 								<TableTravels />
+								<FormTravels />
 							</div>
 						</div>
 					</div>

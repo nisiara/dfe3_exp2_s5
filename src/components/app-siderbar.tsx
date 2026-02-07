@@ -9,8 +9,8 @@ import {
 	IconFileDescription,
 	IconFileWord,
 	IconFolder,
+	IconGlobe,
 	IconHelp,
-	IconInnerShadowTop,
 	IconListDetails,
 	IconReport,
 	IconSearch,
@@ -164,8 +164,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 							className="data-[slot=sidebar-menu-button]:p-1.5!"
 						>
 							<Link href="#">
-								<IconInnerShadowTop className="size-5!" />
-								<span className="text-base font-semibold">Acme Inc.</span>
+								<IconGlobe className="size-6!" />
+								<span className="text-base font-semibold">Viajes Acme Inc.</span>
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
