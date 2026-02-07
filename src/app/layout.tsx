@@ -2,6 +2,10 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
+import { AppSidebar } from '@/components/app-siderbar'
+import { SiteHeader } from '@/components/site-header'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+
 const geistSans = Geist({
 	variable: '--font-geist-sans',
 	subsets: ['latin']
@@ -24,7 +28,36 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				<SidebarProvider
+					className="hidden md:flex"
+					style={
+						{
+							'--sidebar-width': 'calc(var(--spacing) * 64)',
+							'--header-height': 'calc(var(--spacing) * 12 + 1px)'
+						} as React.CSSProperties
+					}
+				>
+					<AppSidebar variant="sidebar" />
+					<SidebarInset>
+						<SiteHeader />
+						<div className="flex flex-1 flex-col">
+							<div className="@container/main flex flex-1 flex-col gap-2">
+								<div className="flex flex-col gap-4 py-4 md:gap-6 md:p-6">
+									{/* <SectionCards /> */}
+									{/* <div className="px-4 lg:px-6">
+									<ChartAreaInteractive />
+								</div> */}
+
+									{/* <TableTravels /> */}
+									{/* <FormTravels /> */}
+									{children}
+								</div>
+							</div>
+						</div>
+					</SidebarInset>
+				</SidebarProvider>
+			</body>
 		</html>
 	)
 }
