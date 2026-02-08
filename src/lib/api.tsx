@@ -2,8 +2,7 @@ import { parse } from 'date-fns'
 
 const API_URL = 'http://localhost:3001/api/travels'
 
-export interface Travel {
-	id: string
+export interface TravelInput {
 	rut: string
 	fullName: string
 	email: string
@@ -12,6 +11,20 @@ export interface Travel {
 	horaSalida: string
 	destino: string
 	fechaRegreso: string
+	horaRegreso: string
+	tipoViaje: string
+}
+
+export interface Travel {
+	id: string
+	rut: string
+	fullName: string
+	email: string
+	origen: string
+	fechaSalida: Date
+	horaSalida: string
+	destino: string
+	fechaRegreso: Date
 	horaRegreso: string
 	tipoViaje: string
 	estado: 'en proceso' | 'confirmado' | 'finalizado'
@@ -25,7 +38,7 @@ export async function fetchTravels(): Promise<Travel[]> {
 	const json = await response.json()
 	// El backend responde { status, message, data }
 	const data = json.data || []
-	return data.map((travel: Travel) => ({
+	return data.map((travel: TravelInput & { id: string; estado: Travel['estado'] }) => ({
 		...travel,
 		fechaSalida: travel.fechaSalida
 			? parse(travel.fechaSalida, 'dd-MM-yyyy', new Date())
@@ -36,7 +49,7 @@ export async function fetchTravels(): Promise<Travel[]> {
 	}))
 }
 
-export async function createTravel(travel: Omit<Travel, 'id' | 'estado'>): Promise<Travel> {
+export async function createTravel(travel: TravelInput): Promise<Travel> {
 	const response = await fetch(API_URL, {
 		method: 'POST',
 		headers: {
@@ -58,7 +71,7 @@ export async function filterTravelsByStatus(status: Travel['estado']): Promise<T
 		throw new Error(error.message || 'Error al filtrar los viajes por estado')
 	}
 	const data = await response.json()
-	return data.map((travel: any) => ({
+	return data.map((travel: TravelInput & { id: string; estado: Travel['estado'] }) => ({
 		...travel,
 		fechaSalida: travel.fechaSalida
 			? parse(travel.fechaSalida, 'dd-MM-yyyy', new Date())

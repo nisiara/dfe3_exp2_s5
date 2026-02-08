@@ -2,6 +2,8 @@
 
 import { IconPlaneArrival, IconPlaneDeparture } from '@tabler/icons-react'
 import { format } from 'date-fns'
+import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import {
 	Table,
@@ -12,18 +14,12 @@ import {
 	TableRow
 } from '@/components/ui/table'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
-
 import type { Travel } from '@/lib/api'
 import { fetchTravels, updateTravelStatus } from '@/lib/api'
-
-import { useEffect, useState } from 'react'
 
 export default function TableTravels() {
 	const [travels, setTravels] = useState<Travel[]>([])
 	const [error, setError] = useState<string | null>(null)
-	const router = useRouter()
 
 	useEffect(() => {
 		const loadTravels = async () => {
@@ -52,7 +48,7 @@ export default function TableTravels() {
 				(travel, index, arr) => arr.findIndex(t => t.id === travel.id) === index
 			)
 			setTravels(uniqueData)
-		} catch (err: any) {
+		} catch (_err: any) {
 			toast.error('Error al actualizar el estado')
 		}
 	}

@@ -509,15 +509,9 @@ export function FormTravels() {
 						<Field orientation="horizontal">
 							<Button
 								type="submit"
-								// disabled={!isFormValid}
+								disabled={!isFormValid}
 							>
 								Registrar Viaje
-							</Button>
-							<Button
-								variant="outline"
-								type="button"
-							>
-								Cancel
 							</Button>
 						</Field>
 					</FieldGroup>

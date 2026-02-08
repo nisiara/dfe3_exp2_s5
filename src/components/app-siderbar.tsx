@@ -35,16 +35,6 @@ const data = {
 			title: 'Lista de Registros',
 			url: '/list-travels',
 			icon: IconListDetails
-		},
-		{
-			title: 'Projects',
-			url: '/projects',
-			icon: IconFolder
-		},
-		{
-			title: 'Team',
-			url: '/team',
-			icon: IconUsers
 		}
 	]
 }
