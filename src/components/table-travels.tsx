@@ -34,19 +34,16 @@ export default function TableTravels({ initialTravels }: { initialTravels: Trave
 		try {
 			await updateTravelStatus(travelId, newStatus)
 			toast.success('Estado actualizado correctamente')
-			// Refetch travels
+
 			const data = await fetchTravels()
-			// Remove duplicates by id
-			const uniqueData = data.filter(
-				(travel, index, arr) => arr.findIndex(t => t.id === travel.id) === index
-			)
-			setTravels(uniqueData)
-		} catch (_err: any) {
+			setTravels(data)
+		} catch (err: any) {
+			setError(err.message || 'Error desconocido al actualizar el estado')
 			toast.error('Error al actualizar el estado')
 		}
 	}
 
-	const frameworks = ['Todos', 'En Proceso', 'Confirmado', 'Finalizado'] as const
+	const estados = ['Todos', 'En Proceso', 'Confirmado', 'Finalizado'] as const
 
 	const filteredTravels =
 		selectedStatus === 'Todos' || !selectedStatus
@@ -60,7 +57,7 @@ export default function TableTravels({ initialTravels }: { initialTravels: Trave
 		<main>
 			<div className="mb-4 w-64">
 				<Combobox
-					items={frameworks}
+					items={estados}
 					onValueChange={value => setSelectedStatus((value as string) || '')}
 				>
 					<ComboboxInput placeholder="Filtrar por estado" />

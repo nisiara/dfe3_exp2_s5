@@ -1,10 +1,8 @@
 # Desarrollo Frontend III - Experiencia 2 Semana 5
 ![Next.js](https://img.shields.io/badge/Next.js-16.1.6-000000?logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-19.2.3-61DAFB?logo=react&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-25-339933?logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-5.2.1-000000?logo=express&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwind-css&logoColor=white)
-![Biome](https://img.shields.io/badge/Biome-2.2.0-E10098?logo=biome&logoColor=white)
+![Biome](https://img.shields.io/badge/Biome-2.2.0-61DAFB?logo=biome&logoColor=white)
 ![Shadcn/ui](https://img.shields.io/badge/Shadcn/ui-3.8.4-000000?logo=shadcn/ui&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)
 
@@ -58,20 +56,15 @@ Antes de ejecutar el proyecto, asegúrate de tener instalados:
 2. Instala las dependencias del frontend:
    ```bash
    npm install
-   # o
-   yarn install
-   # o
-   pnpm install
-   # o
-   bun install
    ```
 
-3. Navega al directorio del backend:
+2. Clona el repositorio del backend:
    ```bash
+   git clone https://github.com/nisiara/dfe3_exp2_s5_be.git
    cd ../travel-backend
    ```
 
-4. Instala las dependencias del backend:
+3. Instala las dependencias del backend:
    ```bash
    npm install
    ```
