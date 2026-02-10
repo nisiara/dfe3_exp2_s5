@@ -5,14 +5,7 @@ import { format } from 'date-fns'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
-import {
-	Combobox,
-	ComboboxContent,
-	ComboboxEmpty,
-	ComboboxInput,
-	ComboboxItem,
-	ComboboxList
-} from '@/components/ui/combobox'
+
 import {
 	Table,
 	TableBody,
@@ -21,9 +14,12 @@ import {
 	TableHeader,
 	TableRow
 } from '@/components/ui/table'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+
 import type { Travel } from '@/lib/api'
 import { fetchTravels, updateTravelStatus } from '@/lib/api'
+
+import FilterTravels from './filter-travels'
+import ChangeStatusTravel from './change-status-travel'
 
 export default function TableTravels({ initialTravels }: { initialTravels: Travel[] }) {
 	const [travels, setTravels] = useState<Travel[]>(initialTravels)
@@ -43,8 +39,6 @@ export default function TableTravels({ initialTravels }: { initialTravels: Trave
 		}
 	}
 
-	const estados = ['Todos', 'En Proceso', 'Confirmado', 'Finalizado'] as const
-
 	const filteredTravels =
 		selectedStatus === 'Todos' || !selectedStatus
 			? travels
@@ -55,27 +49,7 @@ export default function TableTravels({ initialTravels }: { initialTravels: Trave
 
 	return (
 		<main>
-			<div className="mb-4 w-64">
-				<Combobox
-					items={estados}
-					onValueChange={value => setSelectedStatus((value as string) || '')}
-				>
-					<ComboboxInput placeholder="Filtrar por estado" />
-					<ComboboxContent>
-						<ComboboxEmpty>No hay items.</ComboboxEmpty>
-						<ComboboxList>
-							{item => (
-								<ComboboxItem
-									key={item}
-									value={item}
-								>
-									{item}
-								</ComboboxItem>
-							)}
-						</ComboboxList>
-					</ComboboxContent>
-				</Combobox>
-			</div>
+			<FilterTravels setSelectedStatus={setSelectedStatus} />
 			{error ? (
 				<div className="mb-4 text-red-500">
 					<p>{error}</p>
@@ -147,37 +121,10 @@ export default function TableTravels({ initialTravels }: { initialTravels: Trave
 									</Badge>
 								</TableCell>
 								<TableCell>
-									<ToggleGroup
-										type="single"
-										size="sm"
-										value={travel.estado || 'en proceso'}
-										onValueChange={value =>
-											handleStatusChange(travel.id, value as Travel['estado'])
-										}
-										variant="outline"
-									>
-										<ToggleGroupItem
-											className="text-xs p-1"
-											value="en proceso"
-											aria-label="Toggle en proceso"
-										>
-											En Proceso
-										</ToggleGroupItem>
-										<ToggleGroupItem
-											className="text-xs py-1"
-											value="confirmado"
-											aria-label="Toggle confirmado"
-										>
-											Confirmado
-										</ToggleGroupItem>
-										<ToggleGroupItem
-											className="text-xs p-1"
-											value="finalizado"
-											aria-label="Toggle finalizado"
-										>
-											Finalizado
-										</ToggleGroupItem>
-									</ToggleGroup>
+									<ChangeStatusTravel
+										travel={travel}
+										handleStatusChange={handleStatusChange}
+									/>
 								</TableCell>
 							</TableRow>
 						))}
