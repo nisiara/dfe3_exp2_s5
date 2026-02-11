@@ -1,11 +1,12 @@
+import { fetchAllTravels } from '@/lib/api'
 import { SectionCards } from '@/components/sections-cards'
-import { fetchTravels } from '@/lib/api'
+import type { Travel } from '@/lib/api'
 
 export default async function Page() {
-	const travels = await fetchTravels()
-	const viajesEnProceso = travels.filter(travel => travel.estado === 'en proceso')
-	const viajesFinalizados = travels.filter(travel => travel.estado === 'finalizado')
-	const viajesConfirmados = travels.filter(travel => travel.estado === 'confirmado')
+	const travels = await fetchAllTravels()
+	const viajesEnProceso = travels.filter((travel: Travel) => travel.estado === 'en proceso')
+	const viajesFinalizados = travels.filter((travel: Travel) => travel.estado === 'finalizado')
+	const viajesConfirmados = travels.filter((travel: Travel) => travel.estado === 'confirmado')
 
 	return (
 		<SectionCards
